@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLARIS Optics — 无应力 PC 光学 · 为 AR 而生</title>
+<style>
+  :root {
+    --bg: #000;
+    --fg: #f5f5f7;
+    --dim: #86868b;
+    --rainbow: linear-gradient(90deg,#ff5e3a,#ff8f3a,#ffb340,#ffe53a,#a8f03a,#4fe34f,#3adfa0,#3ab0ff,#6f7bff,#a05eff,#e05ee0,#ff5ec4);
+  }
+  .rb-anim {
+    background-image:linear-gradient(90deg,#ff5e3a,#ffb340,#ffe53a,#4fe34f,#3ab0ff,#a05eff,#ff5ec4,#a05eff,#3ab0ff,#4fe34f,#ffe53a,#ffb340,#ff5e3a);
+    background-size:300% 100%;
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:flow 9s ease-in-out infinite;
+  }
+  @keyframes flow { 50% { background-position:100% 0; } }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    background:var(--bg); color:var(--fg);
+    font-family:-apple-system,"PingFang SC","SF Pro Display","Helvetica Neue","Microsoft YaHei",sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* ---------- nav ---------- */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 48px;
+    backdrop-filter:blur(20px) saturate(180%);
+    background:rgba(0,0,0,.55);
+    font-size:14px;
+  }
+  nav .logo { font-weight:600; letter-spacing:.12em; }
+  nav .logo em {
+    font-style:normal;
+    background:var(--rainbow);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  nav a { color:var(--dim); text-decoration:none; margin-left:32px; transition:color .3s; }
+  nav a:hover { color:var(--fg); }
+  /* ---------- hero ---------- */
+  .hero {
+    position:relative; height:100vh;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center; overflow:hidden;
+  }
+  .hero video, .hero img.bg {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; opacity:.85; z-index:-1;
+  }
+  .hero::after {
+    content:""; position:absolute; inset:0; z-index:-1;
+    background:radial-gradient(ellipse at 50% 70%, transparent 30%, #000 85%);
+  }
+  .hero h1 {
+    font-size:clamp(40px,7vw,92px); font-weight:700; letter-spacing:.01em;
+    line-height:1.15;
+  }
+  .hero h1 .rb {
+    background:var(--rainbow);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p { margin-top:24px; font-size:clamp(16px,1.6vw,21px); color:var(--dim); max-width:640px; line-height:1.8; }
+  .hero .cue {
+    position:absolute; bottom:36px; font-size:13px; color:var(--dim);
+    letter-spacing:.35em;
+    animation:bob 2.2s ease-in-out infinite;
+  }
+  @keyframes bob { 50% { transform:translateY(8px); opacity:.4; } }
+  /* ---------- rainbow test section ---------- */
+  .test { position:relative; }
+  .test .sticky {
+    position:sticky; top:0; height:100vh;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center; padding:0 24px;
+  }
+  .test h2 { font-size:clamp(30px,4.2vw,56px); font-weight:700; max-width:900px; letter-spacing:0; line-height:1.3; }
+  .test .stage {
+    margin-top:48px; position:relative;
+    width:min(880px,90vw); aspect-ratio:16/9; border-radius:24px; overflow:hidden;
+    box-shadow:0 40px 120px rgba(0,0,0,.8);
+    -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 12%,#000 82%,transparent 100%);
+    mask-image:linear-gradient(180deg,transparent 0%,#000 12%,#000 82%,transparent 100%);
+  }
+  .test .stage img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .test .stage .pure { opacity:0; }
+  .test .label {
+    position:absolute; bottom:20px; left:24px; font-size:13px; letter-spacing:.1em;
+    color:rgba(255,255,255,.85);
+    background:rgba(0,0,0,.45); padding:6px 14px; border-radius:999px;
+    backdrop-filter:blur(8px);
+  }
+  .spacer { height:180vh; }
+  /* ---------- manifesto ---------- */
+  .manifesto {
+    max-width:820px; margin:0 auto; padding:20vh 24px;
+    font-size:clamp(24px,3vw,40px); font-weight:600; line-height:1.6;
+  }
+  .manifesto .dim { color:var(--dim); }
+  /* ---------- apps ---------- */
+  .apps { max-width:1200px; margin:0 auto; padding:12vh 24px; }
+  .apps h3 { font-size:clamp(28px,3.6vw,48px); font-weight:700; text-align:center; margin-bottom:8vh; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px; }
+  .card {
+    border:1px solid rgba(255,255,255,.09); border-radius:24px; padding:40px 32px;
+    background:linear-gradient(180deg,rgba(255,255,255,.04),transparent);
+    transition:transform .4s ease, border-color .4s ease;
+  }
+  .card:hover { transform:translateY(-6px); border-color:rgba(255,255,255,.22); }
+  .card .num {
+    font-size:13px; letter-spacing:.2em; color:transparent;
+    background:var(--rainbow); -webkit-background-clip:text; background-clip:text;
+    font-weight:700;
+  }
+  .card h4 { font-size:24px; margin:14px 0 12px; }
+  .card p { color:var(--dim); font-size:15px; line-height:1.75; }
+  /* ---------- evidence ---------- */
+  .evidence { max-width:1000px; margin:0 auto; padding:12vh 24px; text-align:center; }
+  .evidence h3 { font-size:clamp(26px,3.4vw,44px); font-weight:700; margin-bottom:16px; }
+  .evidence p.sub { color:var(--dim); margin-bottom:48px; font-size:16px; }
+  .evidence img { width:100%; border-radius:24px; box-shadow:0 40px 120px rgba(0,0,0,.8); }
+  .evidence .cap { margin-top:16px; font-size:13px; color:var(--dim); }
+  /* ---------- specs ---------- */
+  .specs { max-width:820px; margin:0 auto; padding:12vh 24px; }
+  .specs h3 { font-size:clamp(26px,3.4vw,44px); font-weight:700; margin-bottom:48px; text-align:center; }
+  .specs table { width:100%; border-collapse:collapse; font-size:16px; }
+  .specs td { padding:16px 8px; border-bottom:1px solid rgba(255,255,255,.08); }
+  .specs td:first-child { color:var(--dim); width:42%; }
+  /* ---------- contact ---------- */
+  .contact { text-align:center; padding:18vh 24px 14vh; }
+  .contact h3 { font-size:clamp(30px,4.5vw,56px); font-weight:700; line-height:1.3; }
+  .contact h3 .rb { background:var(--rainbow); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .contact p { color:var(--dim); margin:20px 0 40px; font-size:17px; }
+  .btn {
+    display:inline-block; padding:16px 44px; border-radius:999px;
+    background:#fff; color:#000; font-weight:600; font-size:16px; text-decoration:none;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .btn:hover { transform:scale(1.04); box-shadow:0 12px 40px rgba(255,255,255,.18); }
+  footer { text-align:center; padding:40px 24px; color:#555; font-size:13px; }
+  @media (max-width:640px) { nav { padding:14px 20px; } nav a { margin-left:16px; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">CLARIS<em>·</em>OPTICS</div>
+  <div>
+    <a href="#test">彩虹测试</a>
+    <a href="#apps">应用场景</a>
+    <a href="#specs">规格参数</a>
+    <a href="#contact">联系我们</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="bg" src="assets/hero2_001.jpg" alt="">
+  <video autoplay muted loop playsinline id="heroVideo">
+    <source src="assets/hero-loop.mp4" type="video/mp4">
+  </video>
+  <h1>应力无形。<br><span class="rb-anim">直到它毁掉光。</span></h1>
+  <p>为偏振敏感的 AR 显示而生的近零应力聚碳酸酯光学件。<br>注射压缩成型 · 中国丹阳。</p>
+  <div class="cue">下滑 · 彩虹测试</div>
+</section>
+
+<!-- RAINBOW TEST:scroll-driven fade from stressed to pure -->
+<section class="test" id="test">
+  <div class="spacer">
+    <div class="sticky">
+      <h2 id="testHeadline">每一片注塑镜片都藏着应力。<br>你只是还没看见它。</h2>
+      <div class="stage">
+        <img class="stressed" src="assets/stress2_001.jpg" alt="普通镜片在正交偏振片下：鲜艳应力纹">
+        <img class="pure" id="pureImg" src="assets/pure2_001.jpg" alt="CLARIS 无应力镜片：均匀消光">
+        <div class="label" id="stageLabel">普通 PC 镜片 · 正交偏振片下</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <span class="dim">在偏振 AR 显示中，残余应力会扭转光本身——</span>
+  冲掉亮度、偏移色彩、模糊画面。
+  <span class="dim">我们的注射压缩工艺，让应力在诞生之初就被释放，</span>
+  光，按设计的样子到达。
+</section>
+
+<!-- APPLICATIONS -->
+<section class="apps" id="apps">
+  <h3>为 AR 光路而生</h3>
+  <div class="grid">
+    <div class="card">
+      <div class="num">01 / 近视插片</div>
+      <h4>显示光路中的矫正镜片</h4>
+      <p>近视用户在波导片正后方加装插片。这里的任何应力都会弯折偏振显示光。我们的不会——画面保持显示引擎本来的样子。</p>
+    </div>
+    <div class="card">
+      <div class="num">02 / 外罩与面窗镜片</div>
+      <h4>大幅面曲面防护，零彩虹纹</h4>
+      <p>外曲面面窗位于偏振光学前方。带应力的面窗在偏振下泛起彩虹纹，并悄然扭曲显示画面。无应力让它在光学上"隐形"。</p>
+    </div>
+    <div class="card">
+      <div class="num">03 / 波导基板</div>
+      <h4>≤20nm 相位延迟基板，供纳米压印</h4>
+      <p>聚合物波导在写入光栅之前就要求近零双折射。我们提供的基板让光被引导——而不是泄漏。<em>（认证推进中，联系我们获取路线图。）</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- EVIDENCE:real factory photo -->
+<section class="evidence">
+  <h3>别信我们。信偏振片。</h3>
+  <p class="sub">工厂实拍检测照片，正交偏振片下：普通注塑 PC（上，彩虹应力纹）对比 CLARIS 无应力样品（下，均匀消光）。</p>
+  <img src="assets/real-comparison.jpg" alt="工厂正交偏振对比：普通 vs 无应力 PC 镜片">
+  <div class="cap">产线实拍 · 批次相位延迟报告可在保密协议下提供</div>
+</section>
+
+<!-- SPECS -->
+<section class="specs" id="specs">
+  <h3>规格参数</h3>
+  <table>
+    <tr><td>材料</td><td>光学级聚碳酸酯（PC）</td></tr>
+    <tr><td>工艺</td><td>注射压缩成型，专有低应力周期</td></tr>
+    <tr><td>双折射（相位延迟）</td><td>≤ 20 nm 目标值 · 批次报告备索</td></tr>
+    <tr><td>透光率</td><td>≥ 89%（400–780 nm）</td></tr>
+    <tr><td>形态</td><td>曲面镜片（量产中）· 平面基板（认证中）</td></tr>
+    <tr><td>产能</td><td>当前已排满，新合作伙伴窗口开放中</td></tr>
+    <tr><td>合规</td><td>可达 ANSI Z87.1 · FDA/CE 路径推进中</td></tr>
+  </table>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h3>看看<span class="rb">零应力</span>能为你的显示做什么。</h3>
+  <p>样品 7 天内全球发货，含认证支持。</p>
+  <a class="btn" href="mailto:sales@claris-optics.com">申请样品</a>
+</section>
+
+<footer>© 2026 CLARIS Optics · 中国江苏丹阳 · 品牌名为占位，待最终注册</footer>
+
+<script>
+// 滚动驱动 彩虹→纯净 过渡（rAF + lerp 惯性平滑）
+const spacer = document.querySelector('.spacer');
+const pureImg = document.getElementById('pureImg');
+const label = document.getElementById('stageLabel');
+const headline = document.getElementById('testHeadline');
+pureImg.style.willChange = 'opacity';
+let target = 0, current = 0, rafId = null, lastState = null;
+function measure() {
+  const r = spacer.getBoundingClientRect();
+  const total = r.height - window.innerHeight;
+  target = Math.min(1, Math.max(0, -r.top / total));
+  if (!rafId) rafId = requestAnimationFrame(tick);
+}
+function tick() {
+  current += (target - current) * 0.12;
+  if (Math.abs(target - current) < 0.0015) current = target;
+  pureImg.style.opacity = current;
+  const state = current > 0.55 ? 1 : 0;
+  if (state !== lastState) {
+    lastState = state;
+    if (state) {
+      label.textContent = 'CLARIS 无应力镜片 · 正交偏振片下';
+      headline.innerHTML = '我们的镜片，让应力归零。<br>同样的偏振片，什么都不剩。';
+    } else {
+      label.textContent = '普通 PC 镜片 · 正交偏振片下';
+      headline.innerHTML = '每一片注塑镜片都藏着应力。<br>你只是还没看见它。';
+    }
+  }
+  rafId = (current !== target) ? requestAnimationFrame(tick) : null;
+}
+addEventListener('scroll', measure, { passive: true });
+addEventListener('resize', measure, { passive: true });
+measure();
+const v = document.getElementById('heroVideo');
+v.addEventListener('error', () => { v.style.display = 'none'; }, true);
+</script>
+</body>
+</html>
